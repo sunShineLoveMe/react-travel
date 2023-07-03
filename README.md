@@ -45,6 +45,9 @@
 
     ```
 ### 二、路由部分
+``` java 
+    react-router v6版本全面倒向了函数式组件
+```
 1. react-router： 最主流最完整的React路由解决方案
    ``` tsx
     react-router-dom: 用于浏览器，处理web app路由
@@ -58,3 +61,25 @@
     <BrowserRouter /> 可以利用H5 API 实现路由切换
     <HashRouter /> 组件利用原生js中的window.location.hash来实现路由切换
     ```
+### 三、技术相关问题
+1.  type 和 interface 区别<br/>
+    ``` tsx 
+    1.1 type后面有=, interface 没有;
+
+        type ID = string | number;
+        type Circle = {
+            x: number;
+            y: number;
+            radius: number;
+        }
+
+        interface 用来代表一种类型组合，但是它的范围更小一些，只能描述对象结构
+
+        interface Position {
+            x: number;
+            y: number;
+        }
+        
+    1.2 多次声明的同名interface 会进行声明合并，type则不允许多次声明    
+    ```
+     
