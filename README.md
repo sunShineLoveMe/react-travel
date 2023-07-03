@@ -44,4 +44,17 @@
     }
 
     ```
-
+### 二、路由部分
+1. react-router： 最主流最完整的React路由解决方案
+   ``` tsx
+    react-router-dom: 用于浏览器，处理web app路由
+    react-router-native: 用于手机react-native 处理手机app路由
+    react-router-redux： 提供了路由中间件，处理redux的集成
+    react-router-config: 用来静态配置路由
+   ```
+2. ``` tsx 
+    会自动安装react-router 核心框架
+    <Link /> 组件可以渲染出<a /> 标签
+    <BrowserRouter /> 可以利用H5 API 实现路由切换
+    <HashRouter /> 组件利用原生js中的window.location.hash来实现路由切换
+    ```
