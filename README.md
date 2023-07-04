@@ -72,7 +72,7 @@
 真实项目中的redux架构 <br><br>
 ![redux真实项目架构](src/assets/WX20230703-221243@2x.png "redux图片")<br>   
 Redux简化工作流<br><br>
-![redux真实项目架构](src/assets/WX20230703-221243@2x.png "redux图片")<br>      
+![redux真实项目架构](src/assets/WX20230704-102707@2x.png "redux图片")<br>      
 ### 四、技术相关问题
 1.  type 和 interface 区别<br/>
     ``` tsx 
@@ -92,6 +92,14 @@ Redux简化工作流<br><br>
             y: number;
         }
         
-    1.2 多次声明的同名interface 会进行声明合并，type则不允许多次声明    
+    1.2 多次声明的同名interface 会进行声明合并，type则不允许多次声明 
+    
+    1.3 interface 支持继承其他接口
+        interface Shape {
+            color: string;
+        }
+        interface Square extends Shape {
+            sideLength: number;
+        }
     ```
      
