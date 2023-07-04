@@ -70,7 +70,9 @@
     store同步推送数据更新
 ``` 
 真实项目中的redux架构 <br><br>
-![redux真实项目架构](src/assets/WX20230703-221243@2x.png "redux图片")<br>        
+![redux真实项目架构](src/assets/WX20230703-221243@2x.png "redux图片")<br>   
+Redux简化工作流<br><br>
+![redux真实项目架构](src/assets/WX20230703-221243@2x.png "redux图片")<br>      
 ### 四、技术相关问题
 1.  type 和 interface 区别<br/>
     ``` tsx 
