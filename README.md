@@ -61,7 +61,17 @@
     <BrowserRouter /> 可以利用H5 API 实现路由切换
     <HashRouter /> 组件利用原生js中的window.location.hash来实现路由切换
     ```
-### 三、技术相关问题
+### 三、redux相关知识
+``` tsx 
+    总结： redux就是数据仓库，在隔离了数据与UI的同时，负责处理数据的绑定；
+    剥离组件数据
+    数据统一存放在store中
+    组件订阅store获得数据
+    store同步推送数据更新
+``` 
+真实项目中的redux架构 <br><br>
+![redux真实项目架构](src/assets/WX20230703-221243@2x.png "redux图片")<br>        
+### 四、技术相关问题
 1.  type 和 interface 区别<br/>
     ``` tsx 
     1.1 type后面有=, interface 没有;
