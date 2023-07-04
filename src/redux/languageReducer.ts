@@ -1,5 +1,5 @@
-interface LanguageState {
-    language: string;
+export interface LanguageState {
+    language: "en" | "zh";
     languageList: { name: string; code: string }[];
 }
 
@@ -12,5 +12,9 @@ const defaultState: LanguageState = {
 }
 
 export default (state = defaultState, action) => {
+    if(action.type === 'change_language') {
+        const newState = { ... state, language: action.payload };
+        return newState;
+    }
     return state;
 }
