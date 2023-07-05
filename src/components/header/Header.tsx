@@ -4,11 +4,16 @@ import logo from '../../assets/logo.svg';
 import { Button, Dropdown, Input, Layout, Menu, Typography } from 'antd';
 import { GlobalOutlined } from "@ant-design/icons"
 import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "../../redux/hooks";
+import { useDispatch } from "react-redux";
 
 export const Header: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const params = useParams();
+    const language = useSelector((state) => state.language);
+    const languageList = useSelector((state) => state.languageList);
+    const dispatch = useDispatch();
 
     return (
         <div className={styles["app-header"]}>

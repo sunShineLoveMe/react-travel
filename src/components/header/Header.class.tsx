@@ -8,9 +8,10 @@ import store from "../../redux/store";
 import { LanguageState } from "../../redux/language/languageReducer";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { 
-    addLanguageActionCreator, 
-    changeLanguageActionCreator 
-      } from "../../redux/language/languageActions";
+          addLanguageActionCreator, 
+          changeLanguageActionCreator 
+        } from "../../redux/language/languageActions";
+import { connect } from "react-redux";        
 
 interface State extends LanguageState{}
 
