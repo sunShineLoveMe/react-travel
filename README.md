@@ -61,9 +61,9 @@
     <BrowserRouter /> 可以利用H5 API 实现路由切换
     <HashRouter /> 组件利用原生js中的window.location.hash来实现路由切换
     ```
-### 三、redux相关知识
+### 三、redux 和 react-redux 相关知识
 ``` tsx 
-    总结： redux就是数据仓库，在隔离了数据与UI的同时，负责处理数据的绑定；
+总结：redux只是一种架构模式，它可以应用到任意需要使用它的框架，目的就是为了解决复杂应用中不同组件之间共享状态而产生的。本质就是：数据仓库，在隔离了数据与UI的同时，负责处理数据的绑定；
     剥离组件数据
     数据统一存放在store中
     组件订阅store获得数据
@@ -72,7 +72,30 @@
 真实项目中的redux架构 <br><br>
 ![redux真实项目架构](src/assets/WX20230703-221243@2x.png "redux图片")<br>   
 Redux简化工作流<br><br>
-![redux真实项目架构](src/assets/WX20230704-102707@2x.png "redux图片")<br>      
+![redux真实项目架构](src/assets/WX20230704-102707@2x.png "redux图片")<br>
+``` tsx
+redux就是提供了一个叫store的容器，里边的state存放了全局的状态，对外提供了三种方法： getState(), dispatch(), subscribe()
+
+getState(): 用来返回当前state的值.
+
+dispatch(): 用来发起一个action，来告诉一个叫reducer的纯函数怎么去更新state,同时把上一次的state作为参数也传递给reducer,reducer拿到参数后，返回更新后的state,得到新的state后就需要渲染组件，可以通过手动调用render方法，但是比较麻烦。可以采用subscribe()函数重新渲染组件.
+
+subscribe(): 订阅state的变化，当state变化的时候执行回调，可以有多个subscribe,里边的回调会依次执行.
+
+```
+<strong>React-redux 是Redux 的官方绑定库，它能够使你的react组件从Redux store中读取数据，并且向store 分发actions 从而更新数据。</strong><br>
+
+#### 3.1 为什么需要react-redux <br/>
+``` tsx 
+React组件使用redux 需要引入store,并且要手动调用store.subscribe()监听store中的state变化，使用起来比较麻烦。而 react-redux简化了这些步骤。
+
+react-redux 是运用Provider将组件和store对接，使在Provider里的所有组件都能共享store里的数据。
+
+在容器组件中通过react-redux 核心API：connect来连接 UI组件和redux，connect 是一个高阶函数，第一个参数接收的是两个回调函数。
+
+```
+
+
 ### 四、技术相关问题
 1.  type 和 interface 区别<br/>
     ``` tsx 
