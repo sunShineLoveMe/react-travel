@@ -6,6 +6,9 @@ import "antd/dist/antd.min.css";
 import "./i18n/configs";
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import axios from 'axios';
+
+axios.defaults.headers['x-icode'] = '7DE4352BD8128D16'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
