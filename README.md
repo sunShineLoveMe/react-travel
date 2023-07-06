@@ -94,7 +94,13 @@ react-redux 是运用Provider将组件和store对接，使在Provider里的所�
 在容器组件中通过react-redux 核心API：connect来连接 UI组件和redux，connect 是一个高阶函数，第一个参数接收的是两个回调函数。
 
 ```
+#### 3.2 react-redux 之useSelector、useDispatch用法<br/><br/>
+``` tsx
+react-redux从v7.1.0开始，支持hook Api并且暴露了useSelector以及useDispatch等hook.
 
+useSelector 替代 mapStateToProps 从store中提取state数据
+useDispatch 替代 mapDispatchToProps 从store中获取dispatch 方法的引用
+```
 
 ### 四、技术相关问题
 1.  type 和 interface 区别<br/>
