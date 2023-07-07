@@ -101,6 +101,66 @@ react-redux从v7.1.0开始，支持hook Api并且暴露了useSelector以及useDi
 useSelector 替代 mapStateToProps 从store中提取state数据
 useDispatch 替代 mapDispatchToProps 从store中获取dispatch 方法的引用
 ```
+#### 3.3 class类组件中如何使用react-redux中相关技术概念connect() mapStateToProps() mapDispatchToProps()等<br>
+``` tsx
+connect(): 方法用于从UI组件生成容器组件,意思就是将两种组件连接起来。
+
+    import { connect } from 'react-redux'
+    const visibleTodoList = connect()(TodoList)
+
+上面代码中TodoList是 UI 组件，VisibleTodoList就是由 React-Redux 通过connect方法自动生成的容器组件。
+
+但是因为没有定义业务逻辑，上面这个容器组件毫无意义，只是 UI 组件的一个单纯的包装层。为了定义业务逻辑，需要给出下面两方面的信息。
+
+1. 输入逻辑：外部的数据（即state对象）如何转换为UI组件参数
+2. 输出逻辑：用户发出的动作如何变为Action对象，从UI组件传出去
+
+    import { connect } from 'react-redux'
+    const visibleTodoList = connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(TodoList)
+
+    上面代码中，connect方法接受两个参数：mapStateToProps和mapDispatchToProps。他们定义了UI组件的业务逻辑。
+
+    mapStateToProps(): 是一个函数，负责输入逻辑，将state映射到UI组件的参数props.建立一个从（外部的）state对象到（UI组件的）props对象的映射关系。
+
+    作为函数，mapStateToProps执行后应该返回一个对象，里边的每一个键值对就是一个映射。
+
+    const mapStateToProps = (state) => {
+        return {
+            todos: getVisibleTodos(state.todos, state.visibilityFilter)
+        }
+    }
+
+    这段代码中mapStateToProps是一个函数，它接受state作为参数，返回一个对象。
+
+    mapStateToProps会订阅 Store，每当state更新的时候，就会自动执行，重新计算 UI 组件的参数，从而触发 UI 组件的重新渲染。
+
+    ======================================================
+
+    mapDispatchToProps(): 负责输出逻辑，将用户对UI组件的操作映射成Action.也就是说，它定义了哪些用户的操作应该当作 Action，传给 Store。它可以是一个函数，也可以是一个对象。
+
+    const mapDispatchToProps = (dispatch) => {
+        return {
+            fetchStart: () => {
+                dispatch(fetchRecommendProductStartActionCreator())
+            },
+            fetchSuccess: (data) => {
+                dispatch(fetchRecommendProductSuccessActionCreator(data))
+            },
+            fetchFail: (error) => {
+                dispatch(fetchRecommendProductFailActionCreator(error))
+            }
+        }
+    }
+
+    mapDispatchToProps作为函数，应该返回一个对象，该对象的每个键值对都是一个映射，定义了 UI 组件的参数怎样发出 Action。
+
+    如果mapDispatchToProps是一个对象，它的每个键名也是对应 UI 组件的同名参数，键值应该是一个函数，会被当作 Action creator ，返回的 Action 会由 Redux 自动发出。
+
+
+```
 
 ### 四、技术相关问题
 1.  type 和 interface 区别<br/>
