@@ -45,7 +45,7 @@
 
     ```
 ### 二、路由部分
-``` java 
+``` tsx
     react-router v6版本全面倒向了函数式组件
 ```
 1. react-router： 最主流最完整的React路由解决方案
@@ -159,8 +159,19 @@ connect(): 方法用于从UI组件生成容器组件,意思就是将两种组件
 
     如果mapDispatchToProps是一个对象，它的每个键名也是对应 UI 组件的同名参数，键值应该是一个函数，会被当作 Action creator ，返回的 Action 会由 Redux 自动发出。
 
-
 ```
+
+#### 3.4 redux中间件概念
+``` tsx 
+    概念： 中间件可以理解为处理一个功能的中间环节。
+    中间件的优势： 可以串联、组合，在一个项目中使用多个中间件
+                 Redux 中间件用来处理 状态 更新，也就是说在 状态 更新的过程中，执行一系列相应的操作.
+
+    总之： dispatch一个action之后，到达reducer之前，进行一些额外的操作，就需要用到middleware 来进行日志记录，创建崩溃报告，调用异步接口或者路由等。换句话说：中间件就是对store.dispatch()的增强。            
+``` 
+#### 3.5 redux中间件的使用
+![redux真实项目架构](src/assets/WX20230708-102823@2x.png "redux图片")<br/>  
+
 
 ### 四、技术相关问题
 1.  type 和 interface 区别<br/>

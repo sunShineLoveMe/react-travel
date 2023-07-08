@@ -1,13 +1,11 @@
 import React from "react";
 import { Col, Row, Typography, Spin } from 'antd';
 import { Header, Footer, Carousel, SideMenu, ProductCollection, BusinessPartners } from '../../components';
-// import { productList1, productList2, productList3 } from './mockups';
 import sideImage from '../../assets/images/sider_2019_12-09.png';
 import sideImage2 from '../../assets/images/sider_2019_02-04.png';
 import sideImage3 from '../../assets/images/sider_2019_02-04-2.png';
 import styles from './HomePage.module.css';
 import { withTranslation, WithTranslation } from "react-i18next";
-import axios from "axios";
 import { connect } from "react-redux";
 import { RootState } from "../../redux/store";
 import { giveMeDataActionCreator
