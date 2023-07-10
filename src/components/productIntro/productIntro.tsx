@@ -117,10 +117,10 @@ export const ProdcuctIntro: React.FC<PropsType> = ({
             </Carousel>
             <Table<RowType> 
                 columns={columns} 
-                dataSource={tableDataSource} 
-                size="small"
-                bordered={false}
-                pagination={false}
+                dataSource={tableDataSource}  
+                size="small" 
+                bordered={false} 
+                pagination={false} 
             />
         </div>
     )

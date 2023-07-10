@@ -202,4 +202,12 @@ connect(): 方法用于从UI组件生成容器组件,意思就是将两种组件
             sideLength: number;
         }
     ```
-     
+2. react中为了防止注入攻击，进行html渲染的时候需要特殊的语法格式。
+   ``` tsx
+     <div dangerouslySetInnerHTML={{ __html: product.notes }}
+        style={{ margin: 50 }} >
+     </div>
+
+     上面中的dangerouslySetInnerHTML 属性就是防止注入攻击
+   ```
+         

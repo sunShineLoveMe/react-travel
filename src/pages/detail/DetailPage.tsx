@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Col, Row, Spin, DatePicker } from "antd";
+import { Col, Row, Spin, DatePicker, Divider, Typography, Anchor, Menu } from "antd";
 import styles from "./DetailPage.module.css";
-import { Header, Footer, ProdcuctIntro } from "../../components";
-import { InsertRowLeftOutlined } from "@ant-design/icons";
+import { Header, Footer, ProdcuctIntro, ProductComments } from "../../components";
+import { commentMockData } from "./mockup";
 
 type Matchparams = {
     touristRouteId: string;
@@ -59,7 +59,7 @@ export const DetailPage: React.FC = () => {
                 <div className={styles["product-intro-container"]}>
                     <Row>
                         <Col span={13}>
-                            <ProdcuctIntro 
+                            <ProdcuctIntro
                                 title={product.title}
                                 shortDescription={product.description}
                                 price={product.originalPrice}
@@ -76,15 +76,64 @@ export const DetailPage: React.FC = () => {
                     </Row>
                 </div>
                 {/* 锚点菜单 */}
-                <div className={styles["product-detail-anchor"]}></div>
+                <Anchor className={styles["product-detail-anchor"]}>
+                    <Menu mode="horizontal">
+                        <Menu.Item key="1">
+                            <Anchor.Link href="#feature" title="产品特色"></Anchor.Link>
+                        </Menu.Item>
+                        <Menu.Item key="3">
+                            <Anchor.Link href="#fees" title="费用"></Anchor.Link>
+                        </Menu.Item>
+                        <Menu.Item key="4">
+                            <Anchor.Link href="#notes" title="预订须知"></Anchor.Link>
+                        </Menu.Item>
+                        <Menu.Item key="5">
+                            <Anchor.Link href="#comments" title="用户评价"></Anchor.Link>
+                        </Menu.Item>
+                    </Menu>
+                </Anchor>
                 {/* 产品特色 */}
-                <div id="feature" className={styles["product-detail-container"]}></div>
+                <div id="feature" className={styles["product-detail-container"]}>
+                    <Divider orientation={"center"}>
+                        <Typography.Title level={3}>产品特色</Typography.Title>
+                    </Divider>
+                    <div
+                        dangerouslySetInnerHTML={{ __html: product.features }}
+                        style={{ margin: 50 }}
+                    >
+                    </div>
+                </div>
                 {/* 费用 */}
-                <div id="fees" className={styles["product-detail-container"]}></div>
+                <div id="fees" className={styles["product-detail-container"]}>
+                    <Divider orientation={"center"}>
+                        <Typography.Title level={3}>费用</Typography.Title>
+                    </Divider>
+                    <div
+                        dangerouslySetInnerHTML={{ __html: product.fees }}
+                        style={{ margin: 50 }}
+                    >
+                    </div>
+                </div>
                 {/* 预订须知 */}
-                <div id="notes" className={styles["product-detail-container"]}></div>
+                <div id="notes" className={styles["product-detail-container"]}>
+                    <Divider orientation={"center"}>
+                        <Typography.Title level={3}>预订须知</Typography.Title>
+                    </Divider>
+                    <div
+                        dangerouslySetInnerHTML={{ __html: product.notes }}
+                        style={{ margin: 50 }}
+                    >
+                    </div>
+                </div>
                 {/* 商品评价 */}
-                <div id="comments" className={styles["product-detail-container"]}></div>
+                <div id="comments" className={styles["product-detail-container"]}>
+                    <Divider orientation={"center"}>
+                        <Typography.Title level={3}>用户评价</Typography.Title>
+                    </Divider>
+                    <div style={{margin: 40}}>
+                        <ProductComments data={commentMockData} />
+                    </div>
+                </div>
             </div>
             <Footer />
         </>
