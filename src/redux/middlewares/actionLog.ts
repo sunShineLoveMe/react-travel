@@ -6,3 +6,4 @@ export const actionLog: Middleware = (store) => (next) => (action) => {
     next(action);
     console.log("state 更新", store.getState());
 }
+
