@@ -1,10 +1,11 @@
 import styles from './SearchPage.module.css'
-import React, { useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Header, Footer, FilterArea, ProductList } from '../../components'
 import { useParams, useLocation } from 'react-router-dom'
 import { Spin } from 'antd'
 import { searchProduct } from '../../redux/productSearch/slice'
 import { useSelector, useAppDispatch } from '../../redux/hooks'
+import { MainLayout } from '../../layouts/mainLayout'
 
 type MatchParams = {
     keywords: string;
@@ -22,7 +23,7 @@ export const SearchPage: React.FC = () => {
     const location = useLocation();
 
     useEffect(() => {
-        if(keywords) {
+        if (keywords) {
             dispatch(searchProduct({ keywords, nextPage: 1, pageSize: 10 }));
         } else {
             dispatch(searchProduct({ keywords: '', nextPage: 1, pageSize: 10 }));
@@ -30,7 +31,7 @@ export const SearchPage: React.FC = () => {
     }, [location])
 
     const onPageChange = (nextPage, pageSize) => {
-        if(keywords) {
+        if (keywords) {
             dispatch(searchProduct({ nextPage, pageSize, keywords }));
         } else {
             dispatch(searchProduct({ nextPage, pageSize, keywords: '' }));
@@ -57,24 +58,20 @@ export const SearchPage: React.FC = () => {
     }
 
     return (
-        <>
-            <Header/>
-            <div className={styles["page-content"]}>
-                {/* 分类过滤器 */}
-                <div className={styles["product-list-container"]}>
-                    <FilterArea />
-                </div>
-                {/* 产品列表 */}
-                <div className={styles["product-list-container"]}>
-                    <ProductList
-                        data={productList}
-                        paging={pagination}
-                        onPageChange={onPageChange}
-                    />
-                </div>
-            </div>    
-            <Footer/>
-        </>
+        <MainLayout>
+            {/* 分类过滤器 */}
+            <div className={styles["product-list-container"]}>
+                <FilterArea />
+            </div>
+            {/* 产品列表 */}
+            <div className={styles["product-list-container"]}>
+                <ProductList
+                    data={productList}
+                    paging={pagination}
+                    onPageChange={onPageChange}
+                />
+            </div>
+        </MainLayout>
     )
-    
+
 }

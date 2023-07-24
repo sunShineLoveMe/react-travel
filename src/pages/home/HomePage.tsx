@@ -8,8 +8,10 @@ import styles from './HomePage.module.css';
 import { withTranslation, WithTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { RootState } from "../../redux/store";
-import { giveMeDataActionCreator
-    } from "../../redux/recommendProducts/recommendProductsActions";
+import {
+    giveMeDataActionCreator
+} from "../../redux/recommendProducts/recommendProductsActions";
+import { MainLayout } from "../../layouts/mainLayout";
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -27,8 +29,8 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-type PropsType = WithTranslation & 
-    ReturnType<typeof mapStateToProps> & 
+type PropsType = WithTranslation &
+    ReturnType<typeof mapStateToProps> &
     ReturnType<typeof mapDispatchToProps>;
 
 class HomePageComponent extends React.Component<PropsType> {
@@ -57,51 +59,47 @@ class HomePageComponent extends React.Component<PropsType> {
         }
 
         return (
-            <>
-                <Header />
-                <div className={styles['page-content']}>
-                    <Row style={{ marginTop: 20 }}>
-                        <Col span={6}>
-                            <SideMenu />
-                        </Col>
-                        <Col span={18}>
-                            <Carousel />
-                        </Col>
-                    </Row>
-                    <ProductCollection
-                        title={
-                            <Typography.Title level={3} type="warning">
-                                {t("home_page.hot_recommended")}
-                            </Typography.Title>
-                        }
-                        sideImage={sideImage}
-                        products={productList[0].touristRoutes}
-                    />
-                    <ProductCollection
-                        title={<Typography.Title level={3} type="danger">
-                            {t("home_page.new_arrival")}
+            <MainLayout>
+                <Row style={{ marginTop: 20 }}>
+                    <Col span={6}>
+                        <SideMenu />
+                    </Col>
+                    <Col span={18}>
+                        <Carousel />
+                    </Col>
+                </Row>
+                <ProductCollection
+                    title={
+                        <Typography.Title level={3} type="warning">
+                            {t("home_page.hot_recommended")}
                         </Typography.Title>
-                        }
-                        sideImage={sideImage2}
-                        products={productList[1].touristRoutes}
-                    />
-                    <ProductCollection
-                        title={<Typography.Title level={3} type="success">
-                            {t("home_page.domestic_travel")}
-                        </Typography.Title>
-                        }
-                        sideImage={sideImage3}
-                        products={productList[2].touristRoutes}
-                    />
-                    <BusinessPartners />
-                </div>
-                <Footer />
-            </>
+                    }
+                    sideImage={sideImage}
+                    products={productList[0].touristRoutes}
+                />
+                <ProductCollection
+                    title={<Typography.Title level={3} type="danger">
+                        {t("home_page.new_arrival")}
+                    </Typography.Title>
+                    }
+                    sideImage={sideImage2}
+                    products={productList[1].touristRoutes}
+                />
+                <ProductCollection
+                    title={<Typography.Title level={3} type="success">
+                        {t("home_page.domestic_travel")}
+                    </Typography.Title>
+                    }
+                    sideImage={sideImage3}
+                    products={productList[2].touristRoutes}
+                />
+                <BusinessPartners />
+            </MainLayout>
         )
     }
 }
 
 export const HomePage = connect(
-    mapStateToProps, 
+    mapStateToProps,
     mapDispatchToProps
 )(withTranslation()(HomePageComponent));
