@@ -24,12 +24,16 @@ export const SearchPage: React.FC = () => {
     useEffect(() => {
         if(keywords) {
             dispatch(searchProduct({ keywords, nextPage: 1, pageSize: 10 }));
+        } else {
+            dispatch(searchProduct({ keywords: '', nextPage: 1, pageSize: 10 }));
         }
     }, [location])
 
     const onPageChange = (nextPage, pageSize) => {
         if(keywords) {
             dispatch(searchProduct({ nextPage, pageSize, keywords }));
+        } else {
+            dispatch(searchProduct({ nextPage, pageSize, keywords: '' }));
         }
     }
 

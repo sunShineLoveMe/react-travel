@@ -12,7 +12,10 @@ function App() {
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/detail/:touristRouteId" element={<DetailPage />} />
-          <Route path="/search/:keywords" element={<SearchPage />} />
+          {/* <Route path="/search/:keywords" element={<SearchPage />} /> */}
+          <Route path='/search/' element={<SearchPage />}>
+            <Route path=':keywords' element={<SearchPage />} />
+          </Route>
           <Route path="*" element={<h1>404 not found 页面去火星了</h1>} />
         </Routes>
       </BrowserRouter>
