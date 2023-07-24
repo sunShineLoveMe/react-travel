@@ -26,7 +26,7 @@ export const productDetailSlice = createSlice({
     name: 'productDetail',
     initialState,
     reducers: {
-
+        
     },
     extraReducers: {
         [getProductDetail.pending.type]: (state) => {

@@ -172,8 +172,75 @@ connect(): 方法用于从UI组件生成容器组件,意思就是将两种组件
 #### 3.5 redux中间件的使用
 ![redux真实项目架构](src/assets/WX20230708-102823@2x.png "redux图片")<br/>  
 
+### 四、rudux-toolkit概念以及用法
+#### 4.1 相关函数概念
 
-### 四、技术相关问题
+<strong>createAsyncThunk函数</strong>
+
+``` tsx
+
+createAsyncThunk: 创建一个异步的thunk action，具体来说，createAsyncThunk接受两个参数，typePrefix 和 payloadCreator。
+
+typePrefix: 是一个字符串，用于定义Thunk action类型前缀，payloadCreator:是一个异步函数，用于创建thunk的有效载荷，并返回一个promise对象.
+
+
+export const getProductDetail = createAsyncThunk(
+    "productDetail/getProductDetail",
+    async (touristRouteId: string, thunkAPI) => {
+        const { data } = await axios
+                .get(`http://123.56.149.216:8080/api/touristRoutes/${touristRouteId}`)
+        return data;        
+    }
+)
+
+上面这段代码中，typePrefix 是 "productDetail/getProductDetail"。
+
+它表示这个 Thunk action 的类型是 productDetail/getProductDetail/pending、productDetail/getProductDetail/fulfilled 和 productDetail/getProductDetail/rejected。这些类型分别表示 Thunk action 的开始、成功和失败三种状态。
+
+而payloadCreator是一个异步函数，它接受一个名为 touristRouteId 的字符串参数和一个名为 thunkAPI 的对象参数。其中，touristRouteId 表示要获取的旅游路线id；thunkAPI 则是一个包含了一些有用方法和属性的对象，可以用于编写更加复杂的 Thunk action。
+
+上面这段代码中，通过get请求发送id获取了指定旅游路线的详情，并将其存储在data变量中，最后函数返回了data对象，作为Thunk action 的有效负载,这个有效负载会在 Thunk action 被派发时传递给 reducer，并被用于更新 Redux store 中的状态.
+
+```
+<strong>createSlice函数</strong>
+``` tsx
+export const productDetailSlice = createSlice({
+    name: 'productDetail',
+    initialState,
+    reducers: {
+        
+    },
+    extraReducers: {
+        [getProductDetail.pending.type]: (state) => {
+            // return { ...state, loading: true }
+            state.loading = true;
+        },
+        [getProductDetail.fulfilled.type]: (state, action) => {
+            state.data = action.payload;
+            state.loading = false;
+            state.error = null;
+        },
+        [getProductDetail.rejected.type]: (state, action: PayloadAction<string | null>) => {
+            state.loading = false;
+            state.error = action.payload;
+        }
+    }
+})
+
+'createSlice' 函数用于创建一个 Redux reducer 和对应的 action creators。它接受一个包含了 name、initialState、reducers 和 extraReducers 四个属性的配置对象作为参数.
+
+reducers 属性是一个对象，用于定义一组同步的 reducer 函数，它们会被自动转换成相应的 action creators.
+
+extraReducers 属性则是一个对象，用于定义一组异步的 reducer 函数，它们会被自动转换成相应的 Thunk action creators.
+
+上面的例子中，由于 reducers 属性是一个空对象，因此没有定义任何同步的 reducer 函数和对应的 action creators。而 extraReducers 属性则是一个包含了三个 reducer 函数的对象，它们分别对应了 getProductDetail 异步 Thunk action 的开始、成功和失败三种状态。
+
+总之:
+reducers 和 extraReducers 都是用于定义 reducer 函数和对应的 action creators 的属性。它们的区别在于 reducers 用于定义同步的 reducer 函数和对应的 action creators，而 extraReducers 用于定义异步的 reducer 函数和对应的 Thunk action creators。在使用 createSlice 函数时，我们可以根据需要选择使用其中的一个或者两个属性。
+
+```
+
+### 五、技术相关问题
 1.  type 和 interface 区别<br/>
     ``` tsx 
     1.1 type后面有=, interface 没有;
