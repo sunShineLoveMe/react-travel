@@ -237,7 +237,6 @@ extraReducers 属性则是一个对象，用于定义一组异步的 reducer 函
 
 总之:
 reducers 和 extraReducers 都是用于定义 reducer 函数和对应的 action creators 的属性。它们的区别在于 reducers 用于定义同步的 reducer 函数和对应的 action creators，而 extraReducers 用于定义异步的 reducer 函数和对应的 Thunk action creators。在使用 createSlice 函数时，我们可以根据需要选择使用其中的一个或者两个属性。
-
 ```
 
 ### 五、技术相关问题
