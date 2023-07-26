@@ -5,7 +5,8 @@ import { Row, Col, Affix } from 'antd'
 import { PaymentCard, ProductList } from "../../components";
 import { useAppDispatch, useSelector } from "../../redux/hooks";
 import { clearShoppingCartItem, checkout } from "../../redux/shopppingCart/slice";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { use } from "i18next";
 // import { useHistory } from 'react-router-dom'
 
 export const ShoppingCartPage: React.FC = (props) => {
@@ -14,6 +15,8 @@ export const ShoppingCartPage: React.FC = (props) => {
     const shoppingCartItems = useSelector(state => state.shoppingCart.items)
     const jwt = useSelector(state => state.user.token) as string
     const dispatch = useAppDispatch()
+
+    const navigate = useNavigate()
 
     return (
         <MainLayout>
@@ -37,7 +40,7 @@ export const ShoppingCartPage: React.FC = (props) => {
                                         return
                                     }
                                     dispatch(checkout(jwt))
-                                    // Navigate("/placeOrder")
+                                    navigate("/placeOrder")
                                 }}
                                 onShoppingCartClear={
                                     () => {
